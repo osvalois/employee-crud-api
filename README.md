@@ -527,15 +527,7 @@ Si tienes alguna pregunta o necesitas soporte, por favor contacta a:
 
 ## Changelog
 
-### [1.0.0] - 2024-01-15
+### [1.0.0]
 - Lanzamiento inicial de la API de Gestión de Empleados.
 - Implementación de operaciones CRUD básicas.
 - Integración con MongoDB.
-
-### [1.1.0] - 2024-02-01
-- Añadida funcionalidad de búsqueda avanzada.
-- Implementados endpoints para análisis estadístico.
-
-### [1.2.0] - 2024-03-10
-- Integración de patrones de resiliencia con Resilience4j.
-- Mejoras en la documentación de la API.
