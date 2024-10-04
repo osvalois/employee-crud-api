@@ -1,7 +1,8 @@
 package com.picura.employee.mapper;
 
-import com.picura.employee.model.Employee;
 import com.picura.employee.dto.EmployeeDTO;
+import com.picura.employee.entity.Employee;
+
 import org.mapstruct.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

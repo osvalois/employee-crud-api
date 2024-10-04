@@ -2,7 +2,6 @@ package com.picura.employee.controller;
 
 import com.picura.employee.dto.EmployeeDTO;
 import com.picura.employee.service.EmployeeService;
-import com.picura.employee.exception.EmployeeNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,6 +24,11 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
+/**
+ * REST controller for managing Employee resources.
+ * This controller provides endpoints for CRUD operations and various employee-related functionalities.
+ * It uses reactive programming with Spring WebFlux and includes Swagger annotations for API documentation.
+ */
 @RestController
 @RequestMapping("/api/v1/employees")
 @Tag(name = "Employee", description = "API para gestionar empleados")
@@ -34,6 +38,12 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
+    /**
+     * Retrieves all employees.
+     * This endpoint is accessible only to users with ADMIN or HR roles.
+     *
+     * @return A Flux of EmployeeDTO representing all employees
+     */
     @Operation(summary = "Obtener todos los empleados", description = "Retorna un flujo de todos los empleados registrados")
     @ApiResponse(responseCode = "200", description = "Operación exitosa", 
                  content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, 
@@ -44,6 +54,13 @@ public class EmployeeController {
         return employeeService.getAllEmployees(PageRequest.of(0, 10));
     }
 
+    /**
+     * Retrieves an employee by their ID.
+     * This endpoint is accessible to ADMIN, HR, or the employee themselves.
+     *
+     * @param id The ID of the employee to retrieve
+     * @return A Mono of EmployeeDTO representing the requested employee
+     */
     @Operation(summary = "Obtener un empleado por ID", description = "Retorna un empleado basado en su ID")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Empleado encontrado", 
@@ -60,6 +77,13 @@ public class EmployeeController {
         return employeeService.getEmployeeById(id);
     }
 
+    /**
+     * Creates a new employee.
+     * This endpoint is accessible only to users with ADMIN or HR roles.
+     *
+     * @param employeeDTO The EmployeeDTO containing the new employee's information
+     * @return A Mono of EmployeeDTO representing the created employee
+     */
     @Operation(summary = "Crear un nuevo empleado", description = "Crea un nuevo empleado y lo retorna")
     @ApiResponse(responseCode = "201", description = "Empleado creado exitosamente", 
                  content = @Content(mediaType = "application/json", 
@@ -72,6 +96,14 @@ public class EmployeeController {
         return employeeService.createEmployee(employeeDTO);
     }
 
+    /**
+     * Updates an existing employee.
+     * This endpoint is accessible only to users with ADMIN or HR roles.
+     *
+     * @param id The ID of the employee to update
+     * @param employeeDTO The EmployeeDTO containing the updated employee information
+     * @return A Mono of EmployeeDTO representing the updated employee
+     */
     @Operation(summary = "Actualizar un empleado existente", description = "Actualiza un empleado existente basado en su ID")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Empleado actualizado exitosamente", 
@@ -88,6 +120,13 @@ public class EmployeeController {
         return employeeService.updateEmployee(id, employeeDTO);
     }
 
+    /**
+     * Deletes an employee.
+     * This endpoint is accessible only to users with ADMIN role.
+     *
+     * @param id The ID of the employee to delete
+     * @return A Mono<Void> indicating completion of the operation
+     */
     @Operation(summary = "Eliminar un empleado", description = "Elimina un empleado existente basado en su ID")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "204", description = "Empleado eliminado exitosamente"),
@@ -102,6 +141,13 @@ public class EmployeeController {
         return employeeService.deleteEmployee(id);
     }
 
+    /**
+     * Searches for employees by name.
+     * This endpoint is accessible only to users with ADMIN or HR roles.
+     *
+     * @param query The search query string
+     * @return A Flux of EmployeeDTO representing the employees matching the search criteria
+     */
     @Operation(summary = "Buscar empleados", description = "Busca empleados por nombre")
     @ApiResponse(responseCode = "200", description = "Operación exitosa", 
                  content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, 
@@ -113,6 +159,15 @@ public class EmployeeController {
         return employeeService.searchEmployees(query);
     }
 
+    /**
+     * Promotes an employee to a new position with a salary increase.
+     * This endpoint is accessible only to users with ADMIN role.
+     *
+     * @param id The ID of the employee to promote
+     * @param newPosition The new position for the employee
+     * @param salaryIncrease The amount of salary increase
+     * @return A Mono of EmployeeDTO representing the promoted employee
+     */
     @Operation(summary = "Promover empleado", description = "Promociona a un empleado a una nueva posición con aumento de salario")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Empleado promovido exitosamente", 
@@ -130,6 +185,13 @@ public class EmployeeController {
         return employeeService.promoteEmployee(id, newPosition, salaryIncrease);
     }
 
+    /**
+     * Retrieves the top-earning employees.
+     * This endpoint is accessible only to users with ADMIN or HR roles.
+     *
+     * @param limit The number of top earners to retrieve
+     * @return A Flux of EmployeeDTO representing the top-earning employees
+     */
     @Operation(summary = "Obtener los mejores pagados", description = "Obtiene los empleados con los salarios más altos")
     @ApiResponse(responseCode = "200", description = "Operación exitosa", 
                  content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, 
@@ -141,6 +203,12 @@ public class EmployeeController {
         return employeeService.getTopEarners(limit);
     }
 
+    /**
+     * Retrieves the employees with the minimum and maximum salaries.
+     * This endpoint is accessible only to users with ADMIN or HR roles.
+     *
+     * @return A Mono of Tuple2 containing EmployeeDTO with minimum and maximum salaries
+     */
     @Operation(summary = "Obtener empleados con salario mínimo y máximo", description = "Retorna los empleados con el salario más bajo y más alto")
     @ApiResponse(responseCode = "200", description = "Operación exitosa", 
                  content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, 
@@ -151,6 +219,13 @@ public class EmployeeController {
         return employeeService.getEmployeesWithMinMaxSalary();
     }
 
+    /**
+     * Retrieves recently hired employees.
+     * This endpoint is accessible only to users with ADMIN or HR roles.
+     *
+     * @param months The number of months to consider for recent hires
+     * @return A Flux of EmployeeDTO representing recently hired employees
+     */
     @Operation(summary = "Obtener contrataciones recientes", description = "Obtiene los empleados contratados en los últimos meses especificados")
     @ApiResponse(responseCode = "200", description = "Operación exitosa", 
                  content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, 
