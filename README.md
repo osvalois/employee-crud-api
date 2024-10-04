@@ -517,8 +517,6 @@ Este proyecto está licenciado bajo la Licencia MIT - ve el archivo [LICENSE.md]
 Si tienes alguna pregunta o necesitas soporte, por favor contacta a:
 
 - Osvalois - [osvalois@osvalois.tech](mailto:osvalois@osvalois.tech)
-- Equipo de Desarrollo - [dev-team@osvalois.tech](mailto:dev-team@osvalois.tech)
-
 ## Agradecimientos
 
 - [Spring Framework](https://spring.io/) por proporcionar un excelente framework para el desarrollo de aplicaciones Java.
