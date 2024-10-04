@@ -3,8 +3,8 @@ spring:
     allow-bean-definition-overriding: true
   data:
     mongodb:
-      uri: 
-      database: 
+      uri: ${MONGO_URI:mongodb://localhost:27017}
+      database: ${MONGODB_DATABASE:employee_db}
       auto-index-creation: true
       max-connection-pool-size: 100
       min-connection-pool-size: 0
