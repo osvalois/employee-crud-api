@@ -516,8 +516,8 @@ Este proyecto está licenciado bajo la Licencia MIT - ve el archivo [LICENSE.md]
 
 Si tienes alguna pregunta o necesitas soporte, por favor contacta a:
 
-- Osvalois - [osvalois@example.com](mailto:osvalois@example.com)
-- Equipo de Desarrollo - [dev-team@example.com](mailto:dev-team@example.com)
+- Osvalois - [osvalois@osvalois.tech](mailto:osvalois@osvalois.tech)
+- Equipo de Desarrollo - [dev-team@osvalois.tech](mailto:dev-team@osvalois.tech)
 
 ## Agradecimientos
 
