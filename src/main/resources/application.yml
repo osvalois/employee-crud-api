@@ -1,0 +1,86 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    mongodb:
+      uri: 
+      database: 
+      auto-index-creation: true
+      max-connection-pool-size: 100
+      min-connection-pool-size: 0
+      max-connection-idle-time: 60000
+      connect-timeout: 10000
+      socket-timeout: 0
+  application:
+    name: employee-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,circuitbreakers,circuitbreakerevents
+  health:
+    circuitbreakers:
+      enabled: true
+    mongo:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      employeeService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+  retry:
+    instances:
+      employeeService:
+        maxAttempts: 3
+        waitDuration: 1s
+  ratelimiter:
+    instances:
+      employeeService:
+        limitForPeriod: 10
+        limitRefreshPeriod: 1s
+        timeoutDuration: 0s
+  bulkhead:
+    instances:
+      employeeService:
+        maxConcurrentCalls: 10
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+picura:
+  openapi:
+    dev-url: http://localhost:8080
+    prod-url: https://picura-api.com
+
+logging:
+  level:
+    org.springframework.data.mongodb: DEBUG
+    org.mongodb: DEBUG
+    com.picura.employee: INFO
+
+server:
+  port: 8080
