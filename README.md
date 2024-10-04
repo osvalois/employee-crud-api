@@ -38,8 +38,7 @@
 
 ## Descripción General
 
-La Employee Management API es una solución de clase mundial diseñada para proporcionar una gestión robusta, escalable y segura de datos de empleados. Utilizando tecnologías de vanguardia y siguiendo las mejores prácticas de la industria, esta API ofrece un conjunto completo de operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para la gestión de empleados, así como funcionalidades avanzadas como búsqueda, promoción y análisis estadístico.
-
+La Employee Management API para proporcionar una gestión robusta, escalable y segura de datos de empleados.
 Desarrollada con un enfoque en la programación reactiva, alta disponibilidad y resiliencia, esta API está diseñada para manejar cargas de trabajo intensivas y proporcionar tiempos de respuesta óptimos incluso en condiciones de alta concurrencia.
 
 ## Características Clave
