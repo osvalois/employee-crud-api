@@ -1,4 +1,4 @@
-package com.picura.employee.model;
+package com.picura.employee.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
